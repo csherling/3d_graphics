@@ -18,14 +18,29 @@ int main(int argc, char **argv) {
   edges = new_matrix(4, 4);
   transform = new_matrix(4, 4);
 
+  color color;
+  color.red = MAX_COLOR;
+  color.green = 0;
+  color.blue = 0;
+
   /* print_matrix( make_bezier() ); */
   /* printf("\n"); */
   /* print_matrix( make_hermite() ); */
 
-  if ( argc == 2 )
-    parse_file( argv[1], transform, edges, s );
-  else
-    parse_file( "stdin", transform, edges, s );
+  /* if ( argc == 2 ) */
+  /*   parse_file( argv[1], transform, edges, s ); */
+  /* else */
+  /*   parse_file( "stdin", transform, edges, s ); */
+
+  add_box(edges,100,100,100,100,100,100);
+  
+  matrix_mult(make_rotY(M_PI/6),edges); 
+  print_matrix(edges);
+
+  
+  
+  draw_lines(edges, s, color);
+  display(s);
 
   
   free_matrix( edges );

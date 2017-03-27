@@ -25,6 +25,15 @@
 void add_box( struct matrix * edges,
 	      double x, double y, double z,
 	      double width, double height, double depth ) {
+  int i,j,k;
+  for(i=0;i<=1;i++){
+    for(j=0;j<=1;j++){
+      for(k=0;k<=1;k++){
+	add_point(edges,x+i*width,y+j*height,z+k*depth);
+	add_point(edges,x+i*width,y+j*height,z+k*depth);
+      }
+    }
+  }
 }
 
 /*======== void add_sphere() ==========
@@ -45,6 +54,10 @@ void add_box( struct matrix * edges,
 void add_sphere( struct matrix * edges, 
 		 double cx, double cy, double cz,
 		 double r, double step ) {
+
+  struct matrix * tmp;
+  tmp = new_matrix(4, 4);
+  tmp = generate_sphere(cx,cy,cz,r,step);
   return;
 }
 
@@ -62,6 +75,23 @@ void add_sphere( struct matrix * edges,
   ====================*/
 struct matrix * generate_sphere(double cx, double cy, double cz,
 				double r, double step ) {
+  
+  struct matrix * tmp;
+  tmp = new_matrix(4, 4);
+
+  int rota;
+  int circle;
+  
+  for(rota=0;rota<=step;rota++){
+    for(circle=0;circle<=step;circle++){
+      add_point(tmp,
+		r*cos(circle*M_PI/step)+cx,
+		r*sin(circle*M_PI/step)*cos(rota*2*M_PI/step)+cy,
+		r*sin(circle*M_PI/step)*sin(rota*2*M_PI/step)+cz
+		);
+	}
+  }
+  
   return NULL;
 }
 

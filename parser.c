@@ -106,6 +106,11 @@ void parse_file ( char * filename,
       add_circle( edges, xvals[0], yvals[0], zvals[0], r, step);
     }//end of circle
 
+
+    else if ( strncmp(line, "clear", strlen(line)) == 0 ) {
+      edges->lastcol = 0;
+    }//end of circle
+
     else if ( strncmp(line, "hermite", strlen(line)) == 0 ||
 	      strncmp(line, "bezier", strlen(line)) == 0 ) {
       if (strncmp(line, "hermite", strlen(line)) == 0 )
