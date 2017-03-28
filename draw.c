@@ -56,8 +56,30 @@ void add_sphere( struct matrix * edges,
 		 double r, double step ) {
 
   struct matrix * tmp;
+  /* printf("\nGOT HERE 1\n"); fflush(stdout); */
   tmp = new_matrix(4, 4);
+  /* printf("\nGOT HERE 2\n"); fflush(stdout); */
   tmp = generate_sphere(cx,cy,cz,r,step);
+  /* print_matrix(tmp); */
+  /* printf("\nGOT HERE 3\n"); fflush(stdout); */
+  int i;
+  /* printf("\nGOT HERE 3.01\n"); fflush(stdout); */
+  int cols = tmp->lastcol;
+  /* printf("\nGOT HERE 3.02\n"); fflush(stdout); */
+  for(i=0;i<cols;i++){
+    /* printf("/nGOT HERE 3.1/n"); fflush(stdout); */
+    add_point(edges,
+	      tmp->m[0][i],
+	      tmp->m[1][i],
+	      tmp->m[2][i]);
+    /* printf("/nGOT HERE 3.2/n"); fflush(stdout); */
+    add_point(edges,
+	      tmp->m[0][i],
+	      tmp->m[1][i],
+	      tmp->m[2][i]);
+  }
+  /* printf("\nGOT HERE 4\n"); fflush(stdout); */
+
   return;
 }
 
@@ -91,8 +113,8 @@ struct matrix * generate_sphere(double cx, double cy, double cz,
 		);
 	}
   }
-  
-  return NULL;
+  /* print_matrix(tmp); */
+  return tmp;
 }
 
 /*======== void add_torus() ==========
@@ -114,6 +136,30 @@ struct matrix * generate_sphere(double cx, double cy, double cz,
 void add_torus( struct matrix * edges, 
 		double cx, double cy, double cz,
 		double r1, double r2, double step ) {
+  struct matrix * tmp;
+  /* printf("\nGOT HERE 1\n"); fflush(stdout); */
+  tmp = new_matrix(4, 4);
+  /* printf("\nGOT HERE 2\n"); fflush(stdout); */
+  tmp = generate_torus(cx,cy,cz,r1,r2,step);
+  /* print_matrix(tmp); */
+  /* printf("\nGOT HERE 3\n"); fflush(stdout); */
+  int i;
+  /* printf("\nGOT HERE 3.01\n"); fflush(stdout); */
+  int cols = tmp->lastcol;
+  /* printf("\nGOT HERE 3.02\n"); fflush(stdout); */
+  for(i=0;i<cols;i++){
+    /* printf("/nGOT HERE 3.1/n"); fflush(stdout); */
+    add_point(edges,
+	      tmp->m[0][i],
+	      tmp->m[1][i],
+	      tmp->m[2][i]);
+    /* printf("/nGOT HERE 3.2/n"); fflush(stdout); */
+    add_point(edges,
+	      tmp->m[0][i],
+	      tmp->m[1][i],
+	      tmp->m[2][i]);
+  }
+
   return;
 }
 
@@ -131,6 +177,24 @@ void add_torus( struct matrix * edges,
   ====================*/
 struct matrix * generate_torus( double cx, double cy, double cz,
 				double r1, double r2, double step ) {
+  struct matrix * tmp;
+  tmp = new_matrix(4, 4);
+
+  int rota;
+  int circle;
+  
+  for(rota=0;rota<=step;rota++){
+    for(circle=0;circle<=step;circle++){
+      add_point(tmp,
+		cos(rota*2*M_PI/step)*(r2*cos(circle*2*M_PI/step)+r1)+cx,
+		r2*sin(circle*2*M_PI/step)+cy,
+		-1*sin(rota*2*M_PI/step)*(r2*cos(circle*2*M_PI/step)+r1)+cz
+		);
+	}
+  }
+  /* print_matrix(tmp); */
+  return tmp;
+
   return NULL;
 }
 
