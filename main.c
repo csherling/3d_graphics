@@ -36,7 +36,7 @@ int main(int argc, char **argv) {
   
   /* add_sphere(edges,250,250,0,100,20); */
 
-  add_torus(edges,250,250,0,200,50,200);
+  add_torus(edges,250,250,0,50,200,200);
   
   matrix_mult(make_rotY(M_PI/6),edges);
   matrix_mult(make_rotX(M_PI/6),edges);

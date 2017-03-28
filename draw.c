@@ -186,9 +186,9 @@ struct matrix * generate_torus( double cx, double cy, double cz,
   for(rota=0;rota<=step;rota++){
     for(circle=0;circle<=step;circle++){
       add_point(tmp,
-		cos(rota*2*M_PI/step)*(r2*cos(circle*2*M_PI/step)+r1)+cx,
-		r2*sin(circle*2*M_PI/step)+cy,
-		-1*sin(rota*2*M_PI/step)*(r2*cos(circle*2*M_PI/step)+r1)+cz
+		cos(rota*2*M_PI/step)*(r1*cos(circle*2*M_PI/step)+r2)+cx,
+		r1*sin(circle*2*M_PI/step)+cy,
+		-1*sin(rota*2*M_PI/step)*(r1*cos(circle*2*M_PI/step)+r2)+cz
 		);
 	}
   }
