@@ -27,19 +27,19 @@ int main(int argc, char **argv) {
   /* printf("\n"); */
   /* print_matrix( make_hermite() ); */
 
-  /* if ( argc == 2 ) */
-  /*   parse_file( argv[1], transform, edges, s ); */
-  /* else */
-  /*   parse_file( "stdin", transform, edges, s ); */
+  if ( argc == 2 )
+    parse_file( argv[1], transform, edges, s );
+  else
+    parse_file( "stdin", transform, edges, s );
 
   /* add_box(edges,100,100,0,100,100,100); */
   
   /* add_sphere(edges,250,250,0,100,20); */
 
-  add_torus(edges,250,250,0,50,200,200);
+  /* add_torus(edges,250,250,0,50,200,200); */
   
-  matrix_mult(make_rotY(M_PI/6),edges);
-  matrix_mult(make_rotX(M_PI/6),edges);
+  /* matrix_mult(make_rotY(M_PI/6),edges); */
+  /* matrix_mult(make_rotX(M_PI/6),edges); */
   /* print_matrix(edges); */
 
   

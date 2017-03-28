@@ -92,6 +92,7 @@ void parse_file ( char * filename,
     double zvals[4];
     struct matrix *tmp;
     double r;
+    double rtorbig;
     double theta;
     char axis;
     int type;
@@ -111,6 +112,33 @@ void parse_file ( char * filename,
       edges->lastcol = 0;
     }//end of circle
 
+    else if ( strncmp(line, "box", strlen(line)) == 0) {
+      fgets(line, sizeof(line), f);
+
+      sscanf(line, "%lf %lf %lf %lf %lf %lf",
+	     xvals, yvals, zvals, xvals+1,
+	     yvals+1, zvals+1);
+      add_box( edges, xvals[0], yvals[0], zvals[0], xvals[1],
+		 yvals[1], zvals[1]);
+    }//end of curve
+
+    else if ( strncmp(line, "sphere", strlen(line)) == 0) {
+      fgets(line, sizeof(line), f);
+
+      sscanf(line, "%lf %lf %lf %lf",
+	     xvals, yvals, zvals, &r);
+      add_sphere( edges, xvals[0], yvals[0], zvals[0], r, 100);
+    }//end of curve
+
+    else if ( strncmp(line, "torus", strlen(line)) == 0) {
+      fgets(line, sizeof(line), f);
+
+      sscanf(line, "%lf %lf %lf %lf %lf",
+	     xvals, yvals, zvals, &r, &rtorbig);
+      add_torus( edges, xvals[0], yvals[0], zvals[0], r, rtorbig, 100);
+    }//end of curve
+
+    
     else if ( strncmp(line, "hermite", strlen(line)) == 0 ||
 	      strncmp(line, "bezier", strlen(line)) == 0 ) {
       if (strncmp(line, "hermite", strlen(line)) == 0 )
