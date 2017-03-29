@@ -23,14 +23,17 @@ int main(int argc, char **argv) {
   color.green = 0;
   color.blue = 0;
 
+  clear_screen(s);
+  
   /* print_matrix( make_bezier() ); */
   /* printf("\n"); */
   /* print_matrix( make_hermite() ); */
 
-  if ( argc == 2 )
-    parse_file( argv[1], transform, edges, s );
-  else
-    parse_file( "stdin", transform, edges, s );
+
+  /* if ( argc == 2 ) */
+  /*   parse_file( argv[1], transform, edges, s ); */
+  /* else */
+  /*   parse_file( "stdin", transform, edges, s ); */
 
   /* add_box(edges,100,100,0,100,100,100); */
   
@@ -42,11 +45,11 @@ int main(int argc, char **argv) {
   /* matrix_mult(make_rotX(M_PI/6),edges); */
   /* print_matrix(edges); */
 
-  
+  parse_file( "myscript", transform, edges, s );
   
   draw_lines(edges, s, color);
   display(s);
-
+  save_extension(s, "pic1.png");
   
   free_matrix( edges );
   free_matrix( transform );
